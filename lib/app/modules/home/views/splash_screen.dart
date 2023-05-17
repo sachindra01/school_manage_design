@@ -75,7 +75,7 @@ class _SplashScreenState extends State<SplashScreen> {
           textStyle: const TextStyle(
             color: primaryColor,
             fontWeight: FontWeight.bold
-          )),
+          )), 
         ],
         isRepeatingAnimation: true,
         onTap: () {
