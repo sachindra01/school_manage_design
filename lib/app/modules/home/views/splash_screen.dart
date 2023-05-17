@@ -1,5 +1,6 @@
-import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:school_management_app/app/common/style.dart';
 import 'package:school_management_app/app/modules/auth/views/login_screen.dart';
 
@@ -13,9 +14,9 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    // Future.delayed(const Duration(seconds: 3), () async {
-    //   Get.off(() => const LoginScreen());
-    // });
+    Future.delayed(const Duration(seconds: 3), () async {
+      Get.off(() => const LoginScreen());
+    });
 
     super.initState();
   }
@@ -23,25 +24,25 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: primaryColor,
+      backgroundColor: lWhite,
       body: Column(
         children: [
           const SizedBox(
             height: 250,
           ),
-          Center(
-            child: CircleAvatar(
-              radius: 70,
+          CircleAvatar(
+              radius:80,
               backgroundColor: lBlack,
-              child: AnimatedSplashScreen(
-                backgroundColor: primaryColor,
-                curve: Curves.ease,
-                splash: 'assets/img/logo.jpg',
-                nextScreen: const LoginScreen(),
-                splashTransition: SplashTransition.rotationTransition,
+              child: Padding(
+                padding: const EdgeInsets.all(2), // Border radius
+                child:
+                    ClipOval(child: Image.asset('assets/img/logo.jpg')),
               ),
             ),
-          ),
+            const SizedBox(
+              height: 10,
+            ),
+            animatedText(),
           Expanded(child: Container()),
           TextButton(
             style: TextButton.styleFrom(
@@ -50,14 +51,35 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
             onPressed: () {},
-            child: const Text('CODENT ACADEMIC',
+            child: const Text('Version 1.0.0',
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 20, color: Colors.purple)),
+                style: TextStyle(fontSize: 20, color:primaryColor)),
           ),
           const SizedBox(
             height: 50,
           ),
         ],
+      ),
+    );
+  }
+  animatedText(){
+    return  DefaultTextStyle(
+      style: const TextStyle(
+        fontSize: 20.0,
+        color: primaryColor
+      ),
+      child: AnimatedTextKit(
+        animatedTexts: [
+          WavyAnimatedText('DIGITALIZE YOUR SCHOOL...',
+          speed: const Duration(milliseconds: 100),
+          textStyle: const TextStyle(
+            color: primaryColor,
+            fontWeight: FontWeight.bold
+          )),
+        ],
+        isRepeatingAnimation: true,
+        onTap: () {
+        },
       ),
     );
   }

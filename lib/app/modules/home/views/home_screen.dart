@@ -74,6 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: defaultAppbar(
         context,
+        ontap: (){},
         title: const Text('DashBoard'),
         action: [
           InkWell(
