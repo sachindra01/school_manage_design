@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:school_management_app/app/common/read_write.dart';
 import 'package:school_management_app/app/core/theme.dart/theme.dart';
 import 'package:school_management_app/app/modules/home/views/splash_screen.dart';
-import 'package:school_management_app/app_translation/app%20translation.dart';
+import 'package:school_management_app/app/core/app_translation/app%20translation.dart';
 
 void main() {
   runApp(const MyApp());

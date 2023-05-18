@@ -116,7 +116,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Padding(
                 padding: const EdgeInsets.all(2), // Border radius
                 child:
-                    ClipOval(child: Image.asset('assets/img/logo.jpg')),
+                    ClipOval(child: Image.asset('assets/img/person1.png')),
               ),
             ),
           ),

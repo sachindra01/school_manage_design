@@ -7,7 +7,7 @@ class HeaderCurvedContainer extends CustomPainter {
     Paint paint = Paint()..color = primaryColor;
     Path path = Path()
       ..relativeLineTo(0, 150)
-      ..quadraticBezierTo(size.width / 2, 250.0, size.width, 150)
+      ..quadraticBezierTo(size.width / 2, 195.0, size.width, 150)
       ..relativeLineTo(0, -150)
       ..close();
 
