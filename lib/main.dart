@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:get/get.dart';
+import 'package:school_management_app/app/common/read_write.dart';
+import 'package:school_management_app/app/core/theme.dart/theme.dart';
 import 'package:school_management_app/app/modules/home/views/splash_screen.dart';
+import 'package:school_management_app/app_translation/app%20translation.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,9 +20,14 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, child) {
-          return const GetMaterialApp(
+          return GetMaterialApp(
+            translations: AppTranslations(),
+            themeMode: ThemeMode.system,
+            theme: MyTheme.lightTheme,
+            darkTheme: MyTheme.darkTheme,
+            locale: read('lang') == "" ? Get.deviceLocale : Locale(box.read('lang')) ,
             debugShowCheckedModeBanner: false,
-            home: SplashScreen(),
+            home: const SplashScreen(),
           );
         });
   }

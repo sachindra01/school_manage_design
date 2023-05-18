@@ -107,7 +107,7 @@ class CustomTextField extends StatelessWidget {
       maxLength: maxLength,
       onEditingComplete: onEditingComplete,
       obscureText: obscureText,
-      style: inputTextStyle ?? Theme.of(context).textTheme.bodyText2,
+      style: inputTextStyle ?? Theme.of(context).textTheme.bodyMedium,
       focusNode: focusNode,
       autovalidateMode: autovalidateMode ?? AutovalidateMode.onUserInteraction,
       onChanged: onChanged,
@@ -160,18 +160,18 @@ class CustomTextField extends StatelessWidget {
             ),
         hintText: hintText,
         hintStyle: hintStyle ??
-            Theme.of(context).textTheme.bodyText1?.copyWith(
+            Theme.of(context).textTheme.bodyLarge?.copyWith(
                   fontWeight: FontWeight.w400,
                   color: secondaryColor,
                 ),
         labelText: labelText,
         prefixText: prefixText,
         prefixStyle: prefixTextStyle ??
-            Theme.of(context).textTheme.bodyText1?.copyWith(
+            Theme.of(context).textTheme.bodyLarge?.copyWith(
                   fontSize: 30,
                 ),
         labelStyle: labelStyle ??
-            Theme.of(context).textTheme.bodyText1?.copyWith(
+            Theme.of(context).textTheme.bodyLarge?.copyWith(
                   fontWeight: FontWeight.w400,
                 ),
       ),

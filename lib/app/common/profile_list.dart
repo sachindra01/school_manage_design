@@ -5,21 +5,26 @@ import 'package:school_management_app/app/common/style.dart';
 
 class ProfileListItem extends StatelessWidget {
   final IconData ?icon;
+  final Widget ?iconWidget;
+  final IconData ?suffixIcon;
   final String? text;
   final bool? hasNavigation;
   final Color? color;
+  final Color? suffixIconcolor;
+  final double? width;
 
   const ProfileListItem({
     Key? key,
     this.icon,
     this.text,
-    this.hasNavigation = true, this.color,
+    this.hasNavigation = true, this.color, this.suffixIcon, this.suffixIconcolor, this.iconWidget, this.width,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: kSpacingUnit.w * 5.5,
+      height: kSpacingUnit.w * 4,
+      width: width??0.0,
       margin: EdgeInsets.symmetric(
         horizontal: kSpacingUnit.w * 4,
       ).copyWith(
@@ -36,7 +41,7 @@ class ProfileListItem extends StatelessWidget {
         children: <Widget>[
           Icon(
             icon,
-            color: lWhite,
+            color:lWhite,
             size: kSpacingUnit.w * 2.5,
           ),
           SizedBox(width: kSpacingUnit.w * 1.5),
@@ -49,8 +54,9 @@ class ProfileListItem extends StatelessWidget {
           ),
           const Spacer(),
           if (hasNavigation!)
-            Icon(
-              LineAwesomeIcons.angle_right,
+          iconWidget??  Icon(
+             suffixIcon?? LineAwesomeIcons.angle_right,
+             color:suffixIconcolor?? lWhite,
               size: kSpacingUnit.w * 2.5,
             ),
         ],

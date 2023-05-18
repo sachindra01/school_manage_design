@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 const lWhite = Color(0xffffffff);
 const lDarkBlack = Color(0xff000000);
@@ -43,151 +42,12 @@ const bgSideMenu = Color(0xff131e29);
 const white = Colors.white;
 const black = Colors.black;
 
-const defaultPadding = 16.0;
-
-actionButtonStyle() {
-  return ElevatedButton.styleFrom(backgroundColor: buttonColor);
-}
-
-const contactTitleText =
-    TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold);
-
-const contactMenuText =
-    TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold);
-// const contactMenuButton = ElevatedButton.styleFrom();
-
-ralewayRegular(color, double fontsize, double letterSpacing) =>
-    GoogleFonts.raleway(
-      fontSize: fontsize.sp,
-      fontWeight: FontWeight.normal,
-      color: color,
-      letterSpacing: letterSpacing,
-    );
-ralewayRegularLineHeight(
-        color, double fontsize, double letterSpacing, lineHeight) =>
-    GoogleFonts.raleway(
-        fontSize: fontsize.sp,
-        fontWeight: FontWeight.normal,
-        color: color,
-        letterSpacing: letterSpacing,
-        height: lineHeight);
-ralewaySemiBold(color, double fontsize) => GoogleFonts.raleway(
-      fontSize: fontsize.sp,
-      fontWeight: FontWeight.w600,
-      color: color,
-    );
-ralewayBold(color, double fontsize) => GoogleFonts.raleway(
-    fontSize: fontsize.sp, fontWeight: FontWeight.bold, color: color);
-ralewayLight(color, double fontsize, double letterSpacing) =>
-    GoogleFonts.raleway(
-      fontSize: fontsize.sp,
-      fontWeight: FontWeight.w300,
-      color: color,
-      letterSpacing: letterSpacing,
-    );
-ralewayLightLineHeight(
-        color, double fontsize, double letterSpacing, lineHeight) =>
-    GoogleFonts.raleway(
-        fontSize: fontsize.sp,
-        fontWeight: FontWeight.w300,
-        color: color,
-        letterSpacing: letterSpacing,
-        height: lineHeight);
-ralewayLightOpacity(color, double fontsize, double letterSpacing, opacity) =>
-    GoogleFonts.raleway(
-      fontSize: fontsize.sp,
-      fontWeight: FontWeight.w300,
-      color: color.withOpacity(opacity),
-      letterSpacing: letterSpacing,
-    );
-ralewayItalicLight(color, double fontsize) => GoogleFonts.raleway(
-    fontSize: fontsize.sp,
-    fontWeight: FontWeight.w300,
-    color: color,
-    textStyle: const TextStyle(fontStyle: FontStyle.italic));
-ralewayItalic(color, double fontsize) => GoogleFonts.raleway(
-    fontSize: fontsize.sp,
-    fontWeight: FontWeight.normal,
-    color: color,
-    textStyle: const TextStyle(fontStyle: FontStyle.italic));
-ralewayMedium(color, double fontsize) => GoogleFonts.raleway(
-    fontSize: fontsize.sp,
-    fontWeight: FontWeight.w500,
-    color: color,
-    letterSpacing: 0);
-ralewayMediumLineHeight(color, double fontsize, lineHeight) =>
-    GoogleFonts.raleway(
-        fontSize: fontsize.sp,
-        fontWeight: FontWeight.w500,
-        color: color,
-        letterSpacing: 0,
-        height: lineHeight);
-
-helveticaRegular(color, double fontsize) => TextStyle(
-    fontFamily: 'Helvetica',
-    fontSize: fontsize.sp,
-    color: color,
-    fontWeight: FontWeight.w400,
-    letterSpacing: -0.5);
-
-avenirNextRegular(color, double fontSize) => TextStyle(
-    fontFamily: 'Avenir Next Condensed',
-    fontSize: fontSize.sp,
-    color: color,
-    fontWeight: FontWeight.w400,
-    letterSpacing: 0);
-avenirNextRegularLetterSpacing(color, double fontSize, letterSpacing) =>
-    TextStyle(
-        fontFamily: 'Avenir Next Condensed',
-        fontSize: fontSize.sp,
-        color: color,
-        fontWeight: FontWeight.w400,
-        letterSpacing: letterSpacing);
-
-avenirNextMedium(color, double fontSize) => TextStyle(
-    fontFamily: 'Avenir Next Condensed',
-    fontSize: fontSize.sp,
-    fontWeight: FontWeight.w600,
-    color: color,
-    letterSpacing: 0);
-avenirNextMediumSpacing(color, double fontSize, double letterSpacing,
-        [lineheight]) =>
-    TextStyle(
-        fontFamily: 'Avenir Next Condensed',
-        fontSize: fontSize.sp,
-        fontWeight: FontWeight.w600,
-        color: color,
-        letterSpacing: letterSpacing,
-        height: lineheight);
-avenirNextMediumLineHeight(color, double fontSize, lineHeight) => TextStyle(
-    fontFamily: 'Avenir Next Condensed',
-    fontSize: fontSize.sp,
-    fontWeight: FontWeight.w600,
-    color: color,
-    letterSpacing: 0,
-    height: lineHeight);
-avenirNextMediumUnderline(color, double fontSize) => TextStyle(
-    fontFamily: 'Avenir Next Condensed',
-    fontSize: fontSize.sp,
-    fontWeight: FontWeight.w600,
-    color: color,
-    letterSpacing: 0,
-    decoration: TextDecoration.lineThrough,
-    decorationThickness: 2.sp,
-    decorationColor: lBlack.withOpacity(0.8),
-    decorationStyle: TextDecorationStyle.solid);
-
-ColorFilter lFilter =
-    ColorFilter.mode(lBlack.withOpacity(0.8), BlendMode.multiply);
-
 const kSpacingUnit = 10;
-
 const kDarkPrimaryColor = Color(0xFF212121);
 const kDarkSecondaryColor = Color(0xFF373737);
 const kLightPrimaryColor = Color(0xFFFFFFFF);
 const kLightSecondaryColor = Color(0xFFF3F7FB);
 const kAccentColor = Color(0xFFFFC107);
-
 final kTitleTextStyle = TextStyle(
   fontSize: ScreenUtil().setSp(kSpacingUnit.w * 1.7),
   fontWeight: FontWeight.w600,
@@ -209,7 +69,6 @@ final kDarkTheme = ThemeData(
   fontFamily: 'SFProText',
   primaryColor: kDarkPrimaryColor,
   canvasColor: kDarkPrimaryColor,
-  backgroundColor: kDarkSecondaryColor,
   iconTheme: ThemeData.dark().iconTheme.copyWith(
         color: kLightSecondaryColor,
       ),
@@ -217,7 +76,7 @@ final kDarkTheme = ThemeData(
         fontFamily: 'SFProText',
         bodyColor: kLightSecondaryColor,
         displayColor: kLightSecondaryColor,
-      ), colorScheme: ColorScheme.fromSwatch().copyWith(secondary: kAccentColor),
+      ), colorScheme: ColorScheme.fromSwatch().copyWith(secondary: kAccentColor).copyWith(background: kDarkSecondaryColor),
 );
 
 final kLightTheme = ThemeData(
@@ -225,7 +84,6 @@ final kLightTheme = ThemeData(
   fontFamily: 'SFProText',
   primaryColor: kLightPrimaryColor,
   canvasColor: kLightPrimaryColor,
-  backgroundColor: kLightSecondaryColor,
   iconTheme: ThemeData.light().iconTheme.copyWith(
         color: kDarkSecondaryColor,
       ),
@@ -233,5 +91,5 @@ final kLightTheme = ThemeData(
         fontFamily: 'SFProText',
         bodyColor: kDarkSecondaryColor,
         displayColor: kDarkSecondaryColor,
-      ), colorScheme: ColorScheme.fromSwatch().copyWith(secondary: kAccentColor),
+      ), colorScheme: ColorScheme.fromSwatch().copyWith(secondary: kAccentColor).copyWith(background: kLightSecondaryColor),
 );

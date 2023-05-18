@@ -1,0 +1,1 @@
+List language = ['English', 'नेपाली'];
