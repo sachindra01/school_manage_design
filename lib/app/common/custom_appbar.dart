@@ -5,7 +5,7 @@ defaultAppbar(context,{Widget? title, List<Widget>? action, autoImplying,Widget 
   return AppBar(
     elevation: 0.0,
     leading:Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(10.0),
       child: InkWell(
         onTap:ontap?? (){
           Navigator.of(context).pop();

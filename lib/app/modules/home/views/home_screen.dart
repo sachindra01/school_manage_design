@@ -6,6 +6,9 @@ import 'package:school_management_app/app/common/carousel_slider.dart';
 import 'package:school_management_app/app/common/custom_appbar.dart';
 import 'package:school_management_app/app/common/style.dart';
 import 'package:school_management_app/app/modules/profile/views/profile_screen.dart';
+import 'package:school_management_app/app/modules/unauthorise_module/feedback/feedback_screen.dart';
+import 'package:school_management_app/app/modules/unauthorise_module/notice/notice_board_screen.dart';
+import 'package:school_management_app/app/modules/unauthorise_module/staff_hierachy/staff_hierachy_screen.dart';
 
 
 
@@ -192,9 +195,13 @@ class _HomeScreenState extends State<HomeScreen> {
           child: InkWell(
             onTap: () {
               if (choices[index].id == 4) {
+                Get.to(()=>const StaffDetail());
                
-              } else {
+              } else if (choices[index].id == 3){
+                  Get.to(()=>const NoticeBoardScreen());
                 
+              }else{
+                 Get.to(()=>const Feedbackform());
               }
             },
             child: Column(

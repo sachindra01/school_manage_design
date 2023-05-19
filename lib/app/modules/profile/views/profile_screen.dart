@@ -150,7 +150,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           items: language.map<DropdownMenuItem<String>>((val) {
                             return DropdownMenuItem<String>(
                               value: val,
-                              child: Text(val)
+                              child: Row(
+                                children: [
+                                 val=='English'
+                                 ?Padding(
+                                   padding: const EdgeInsets.all(5.0),
+                                   child: Image.asset('assets/img/uk.png', height: 20,width: 20),
+                                 )
+                                 :Image.asset('assets/img/nepal.png', height: 15,width: 20,),
+                                  Text(val),
+                                ],
+                              )
                             );
                           }).toList(), 
                           onChanged: (newVal) {
@@ -208,9 +218,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       icon: LineAwesomeIcons.question_circle,
                       text: 'help and support'.tr
                     ),
-                    
-                   
-                   
                   ],
                 ),
                 ),
