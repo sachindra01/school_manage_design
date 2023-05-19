@@ -2,9 +2,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:school_management_app/app/common/carousel_slider.dart';
 import 'package:school_management_app/app/common/custom_appbar.dart';
 import 'package:school_management_app/app/common/style.dart';
+import 'package:school_management_app/app/modules/notification/notification_screen.dart';
 import 'package:school_management_app/app/modules/profile/views/profile_screen.dart';
 import 'package:school_management_app/app/modules/unauthorise_module/feedback/feedback_screen.dart';
 import 'package:school_management_app/app/modules/unauthorise_module/notice/notice_board_screen.dart';
@@ -111,6 +113,14 @@ class _HomeScreenState extends State<HomeScreen> {
         action: [
           InkWell(
             onTap: (){
+              Get.to(()=>const NotificationScreen());
+            },
+            child: const Icon(LineAwesomeIcons.bell,size: 30.0,)
+          ),
+        ],
+        autoImplying: true,
+        leadingIcon: InkWell(
+            onTap: (){
               Get.to(()=>const ProfileScreen());
             },
             child: CircleAvatar(
@@ -123,8 +133,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-        ],
-        autoImplying: true,leadingIcon: const Icon(Icons.menu)
         ),
       body:SingleChildScrollView(
         physics: const NeverScrollableScrollPhysics(),
