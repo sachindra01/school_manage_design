@@ -3,7 +3,7 @@ import 'interceptor/logging_interceptor.dart';
 
 final dio = Dio(
   BaseOptions(
-    baseUrl: '',
+    baseUrl: 'https://school.learninstep.com/',
     headers: <String, String>{
       "Content-Type": "application/json",
       "Accept": "application/json",

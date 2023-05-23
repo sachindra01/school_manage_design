@@ -8,7 +8,7 @@ loadingWidget([double? height]) {
       height: height ?? 60,
       child: const LoadingIndicator(
         indicatorType: Indicator.ballSpinFadeLoader,
-        colors: [lGrey],
+        colors: [primaryColor],
         // pathBackgroundColor: red,
       ),
     ),

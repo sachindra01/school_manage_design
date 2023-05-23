@@ -6,7 +6,9 @@ import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:school_management_app/app/common/carousel_slider.dart';
 import 'package:school_management_app/app/common/custom_textfield.dart';
 import 'package:school_management_app/app/common/gradient_button.dart';
+import 'package:school_management_app/app/common/loading_widget.dart';
 import 'package:school_management_app/app/common/style.dart';
+import 'package:school_management_app/app/modules/auth/auth_contoller.dart';
 import 'package:school_management_app/app/modules/home/views/home_screen.dart';
 
 // ignore: unused_import
@@ -26,6 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController passwordCtr = TextEditingController();
   final FocusNode _passfocusNode = FocusNode();
   final FocusNode _emailfocusNode = FocusNode();
+  final AuthController _authController =Get.put(AuthController());
   @override
   void dispose() {
     emailCtr.dispose();
@@ -64,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 Center(
                   child: CircleAvatar(
-                    radius: 60,
+                    radius: 80,
                     backgroundColor: lBlack,
                     child: Padding(
                       padding: const EdgeInsets.all(8), // Border radius
@@ -108,7 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Column(
                         children: [
                           const SizedBox(
-                            height: 15,
+                            height: 20,
                           ),
                           Form(
                             key: formKey,
@@ -245,20 +248,28 @@ class _LoginScreenState extends State<LoginScreen> {
                           //           trailingIcon: const SizedBox(),
                           //         ),
                           // ),
-                          GradientButton(
-                            text: "Login".tr,
-                            height: 40.h,
-                            width: 200.w,
-                            borderRadius: 100.r,
-                            onPressed: (){
-                              Get.to(()=> const HomeScreen(
-                              ));
-                            }
+                          Obx(()=> 
+                         _authController.isLoading.value
+                         ? loadingWidget()
+                         : GradientButton(
+                              text: "Login".tr,
+                              height: 40.h,
+                              width: 200.w,
+                              borderRadius: 100.r,
+                              onPressed: (){
+                                _authController.getLogin(emailCtr.text, passwordCtr.text);
+                                if(_authController.loginResponse!=null){
+                                Get.to(()=> const HomeScreen(
+                                ));
+
+                                }
+                              }
+                            ),
                           ),
                           const SizedBox(
-                            height: 20,
+                            height: 10,
                           ),
-                          biometric(context),
+                          bioMetrics(context),
                         ],
                       ),
                     ),
@@ -266,9 +277,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 10),
                 bannerCarouseSlider(context, 150.0, 300.0),
-                const SizedBox(height: 10),
-                containerTile(),
-                const SizedBox(height: 10),
               ],
             ),
           ),
@@ -344,24 +352,36 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  biometric(context) {
-    return Center(
+  
+  bioMetrics(context) {
+    return Visibility(
+      visible: !_authController.canUseBiometic,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
         children: [
-          InkWell(
+          GestureDetector(
             child: Container(
-              padding: const EdgeInsets.all(8.0),
+              height: 100.0,
+              width: 80.0,
               decoration: BoxDecoration(
-                  border: Border.all(color: primaryColor),
-                  borderRadius: const BorderRadius.all(Radius.circular(10.0))),
-              child: const Icon(LineAwesomeIcons.fingerprint,
-                  color: Colors.green, size: 40.0),
+                border: Border.all(
+                  color: lGrey,
+                ),
+                borderRadius: const BorderRadius.all(Radius.circular(20))
+              ),
+              child: const Icon(
+                Icons.fingerprint,
+                size: 80.0,
+              ),
             ),
-            onTap: () {},
+            onTap: () async => await _authController.authenticate(context),
           ),
+          const SizedBox(height: 8.0),
+          const Text(
+            'Use Biometrics to log in',
+            style: TextStyle(
+              color: greyColor
+            ),
+          )
         ],
       ),
     );
