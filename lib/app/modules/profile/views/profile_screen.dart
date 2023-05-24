@@ -232,12 +232,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         onTap: (){
           customDialogBox(
             context, 
-            "Do you want to exit app?", 
-            (){}, 
-            (){},
-            // (){
-            //   Navigator.pop(context);
-            // }
           );
         },
         child: Container(

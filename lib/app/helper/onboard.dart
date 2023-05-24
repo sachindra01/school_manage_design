@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:school_management_app/app/helper/auth_manager.dart';
+import 'package:school_management_app/app/common/read_write.dart';
 import 'package:school_management_app/app/modules/auth/views/login_screen.dart';
 import 'package:school_management_app/app/modules/home/views/home_screen.dart';
 
@@ -9,13 +8,9 @@ class OnBoard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AuthenticationManager authManager = Get.find();
-
-    return Obx(() {
-      return authManager.isLogged.value
+      return read('apiToken')!=''
           ? const HomeScreen(
             )
           : const LoginScreen();
-    });
   }
 }

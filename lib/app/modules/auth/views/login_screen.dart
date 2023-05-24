@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
-import 'package:school_management_app/app/common/carousel_slider.dart';
 import 'package:school_management_app/app/common/custom_textfield.dart';
 import 'package:school_management_app/app/common/gradient_button.dart';
 import 'package:school_management_app/app/common/loading_widget.dart';
@@ -256,13 +255,16 @@ class _LoginScreenState extends State<LoginScreen> {
                               height: 40.h,
                               width: 200.w,
                               borderRadius: 100.r,
-                              onPressed: (){
-                                _authController.getLogin(emailCtr.text, passwordCtr.text);
-                                if(_authController.loginResponse!=null){
-                                Get.to(()=> const HomeScreen(
-                                ));
-
+                              onPressed: ()async{
+                                if (formKey.currentState!.validate()) {
+                                 await _authController.getLogin(emailCtr.text, passwordCtr.text);
+                                  if(_authController.loginResponse.message=='Logged in successfully'){
+                                    setState(() {
+                                  Get.to(()=>const HomeScreen());
+                                      
+                                    });
                                 }
+                              }
                               }
                             ),
                           ),
@@ -275,8 +277,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 10),
-                bannerCarouseSlider(context, 150.0, 300.0),
+                // const SizedBox(height: 10),
+                // bannerCarouseSlider(context, 150.0, 300.0),
               ],
             ),
           ),

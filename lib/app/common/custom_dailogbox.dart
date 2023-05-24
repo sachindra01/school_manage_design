@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:school_management_app/app/helper/auth_manager.dart';
+import 'package:school_management_app/app/modules/auth/views/login_screen.dart';
 
-
-customDialogBox(context, title, onYes, onNo,[onOk]){
+  final AuthenticationManager authManager=AuthenticationManager();
+customDialogBox(context,){
   return showDialog(
     context: context, 
     builder: (context){
@@ -13,7 +16,12 @@ customDialogBox(context, title, onYes, onNo,[onOk]){
  okButton(context){
   return TextButton(
       child: const Text("Leave now",style: TextStyle(color: Colors.red),),
-      onPressed: () {Navigator.pop(context);  },
+      onPressed:(){
+       bool sucess= authManager.logOut();
+       if(sucess==true){
+        Get.off(()=>const LoginScreen());
+       }
+      } ,
     );}
 
     Widget nopeButton(context){

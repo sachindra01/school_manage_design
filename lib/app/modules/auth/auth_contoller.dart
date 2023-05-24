@@ -1,12 +1,10 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
-
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:school_management_app/app/common/read_write.dart';
 import 'package:school_management_app/app/common/toast_message.dart';
+import 'package:school_management_app/app/helper/auth_manager.dart';
 import 'package:school_management_app/app/modules/auth/views/repo.dart';
 import 'package:local_auth/local_auth.dart';
 
@@ -18,6 +16,7 @@ class AuthController extends GetxController {
   var billingDate;
   bool canAuthenticateWithBio = false;
   bool canUseBiometic = false;
+  final AuthenticationManager authManager=AuthenticationManager();
 
 
   getLogin(email,password) async {
@@ -26,7 +25,11 @@ class AuthController extends GetxController {
       var response = await _authServices.fetchLogin(email,password);
       if(response != null){
         loginResponse = response;
+        write('apiToken', loginResponse.data.token);
+          authManager.login(loginResponse.data.token);
+
          showToastMessage(loginResponse.message);
+       
 
       } else {
         debugPrint('Cannot retrieve billing data');
@@ -58,7 +61,8 @@ class AuthController extends GetxController {
         var data = read('loginInfo');
         await getLogin(data['official_email'], data['password'],);
       }
-    } on PlatformException catch (e) {
+    // ignore: empty_catches
+    } on PlatformException {
     }
   }
  

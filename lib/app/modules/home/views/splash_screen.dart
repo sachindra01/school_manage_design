@@ -1,9 +1,9 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:school_management_app/app/common/read_write.dart';
 import 'package:school_management_app/app/common/style.dart';
-import 'package:school_management_app/app/modules/auth/views/login_screen.dart';
+import 'package:school_management_app/app/helper/auth_manager.dart';
+import 'package:school_management_app/app/helper/onboard.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -13,21 +13,27 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+    final AuthenticationManager _authmanager = Get.put(AuthenticationManager());
   @override
   void initState() {
-    if(read('isDarkMode') == null || read('isDarkMode') == "") {
-        write('isDarkMode', Get.isDarkMode);
-      } else {
-        Get.changeThemeMode(
-          read('isDarkMode') ? ThemeMode.dark : ThemeMode.light
-        );
-      }
+    initializeSettings();
     Future.delayed(const Duration(seconds: 3), () async {
-      Get.off(() => const LoginScreen());
+      Get.off(() => const OnBoard());
     });
+    // if(read('isDarkMode') == null || read('isDarkMode') == "") {
+    //     write('isDarkMode', Get.isDarkMode);
+    //   } else {
+    //     Get.changeThemeMode(
+    //       read('isDarkMode') ? ThemeMode.dark : ThemeMode.light
+    //     );
+    //   }
 
     super.initState();
   }
+  initializeSettings() async {
+    _authmanager.checkLoginStatus();
+  }
+
 
   @override
   Widget build(BuildContext context) {

@@ -6,10 +6,10 @@ import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:school_management_app/app/common/carousel_slider.dart';
 import 'package:school_management_app/app/common/custom_appbar.dart';
 import 'package:school_management_app/app/common/style.dart';
+import 'package:school_management_app/app/modules/leave/leave_design.dart';
 import 'package:school_management_app/app/modules/notification/notification_screen.dart';
 import 'package:school_management_app/app/modules/profile/views/profile_screen.dart';
 import 'package:school_management_app/app/modules/unauthorise_module/feedback/feedback_screen.dart';
-import 'package:school_management_app/app/modules/unauthorise_module/notice/notice_board_screen.dart';
 import 'package:school_management_app/app/modules/unauthorise_module/staff_hierachy/staff_hierachy_screen.dart';
 
 
@@ -206,7 +206,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Get.to(()=>const StaffDetail());
                
               } else if (choices[index].id == 3){
-                  Get.to(()=>const NoticeBoardScreen());
+                  Get.to(()=>const LeavePage());
                 
               }else{
                  Get.to(()=>const Feedbackform());
