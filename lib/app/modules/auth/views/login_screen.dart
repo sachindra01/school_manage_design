@@ -356,36 +356,41 @@ class _LoginScreenState extends State<LoginScreen> {
 
   
   bioMetrics(context) {
-    return Visibility(
-      visible: !_authController.canUseBiometic,
-      child: Column(
-        children: [
-          GestureDetector(
-            child: Container(
-              height: 100.0,
-              width: 80.0,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: lGrey,
+    return GetBuilder(
+      init: AuthController(),
+      builder: (context) {
+        return Visibility(
+          visible: _authController.canUseBiometic,
+          child: Column(
+            children: [
+              GestureDetector(
+                child: Container(
+                  height: 100.0,
+                  width: 80.0,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: lGrey,
+                    ),
+                    borderRadius: const BorderRadius.all(Radius.circular(20))
+                  ),
+                  child: const Icon(
+                    Icons.fingerprint,
+                    size: 80.0,
+                  ),
                 ),
-                borderRadius: const BorderRadius.all(Radius.circular(20))
+                onTap: () async => await _authController.authenticate(context),
               ),
-              child: const Icon(
-                Icons.fingerprint,
-                size: 80.0,
-              ),
-            ),
-            onTap: () async => await _authController.authenticate(context),
+              const SizedBox(height: 8.0),
+              const Text(
+                'Use Biometrics to log in',
+                style: TextStyle(
+                  color: greyColor
+                ),
+              )
+            ],
           ),
-          const SizedBox(height: 8.0),
-          const Text(
-            'Use Biometrics to log in',
-            style: TextStyle(
-              color: greyColor
-            ),
-          )
-        ],
-      ),
+        );
+      }
     );
   }
 }

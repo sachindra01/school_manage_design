@@ -23,10 +23,12 @@ class AuthController extends GetxController {
     try {
       isLoading(true);
       var response = await _authServices.fetchLogin(email,password);
+        write('loginInfopassword',  password);
       if(response != null){
         loginResponse = response;
+        write('loginInfoemail',  loginResponse.data.data.user.email);
         write('apiToken', loginResponse.data.token);
-          authManager.login(loginResponse.data.token);
+         authManager.login( loginResponse.data.token);
 
          showToastMessage(loginResponse.message);
        

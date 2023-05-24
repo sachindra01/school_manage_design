@@ -1,17 +1,19 @@
-import 'package:school_management_app/app/common/read_write.dart';
+import 'package:get_storage/get_storage.dart';
 
 mixin CacheManager {
   Future<bool> saveToken(String? token) async {
-    await write('apiToken', token);
+    final box = GetStorage();
+    await box.write('apiToken', token);
     return true;
   }
 
-  getToken() {
-    var apiToken = read('apiToken'); 
-    return apiToken;
+  String? getToken() {
+    final box = GetStorage();
+    return box.read('apiToken');
   }
 
   Future<void> removeToken() async {
-    await remove('apiToken');
+    final box = GetStorage();
+    await box.remove('apiToken');
   }
 }

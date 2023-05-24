@@ -51,6 +51,7 @@ dependencies:
   flag: ^6.0.0
   cached_network_image: ^3.2.3
   image_picker: ^0.8.7+5
+  table_calendar: ^3.0.9
   local_auth: ^2.1.6
 
 flutter_icons:

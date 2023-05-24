@@ -6,6 +6,7 @@ import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:school_management_app/app/common/carousel_slider.dart';
 import 'package:school_management_app/app/common/custom_appbar.dart';
 import 'package:school_management_app/app/common/style.dart';
+import 'package:school_management_app/app/modules/attendence/attendence.dart';
 import 'package:school_management_app/app/modules/leave/leave_design.dart';
 import 'package:school_management_app/app/modules/notification/notification_screen.dart';
 import 'package:school_management_app/app/modules/profile/views/profile_screen.dart';
@@ -202,13 +203,17 @@ class _HomeScreenState extends State<HomeScreen> {
           elevation: 3.0,
           child: InkWell(
             onTap: () {
-              if (choices[index].id == 4) {
-                Get.to(()=>const StaffDetail());
+              if (choices[index].id == 1) {
+                Get.to(()=>const AttendencePage());
                
-              } else if (choices[index].id == 3){
+              } else if (choices[index].id == 4){
                   Get.to(()=>const LeavePage());
                 
-              }else{
+              }else if (choices[index].id == 3){
+                  Get.to(()=>const StaffDetail());
+                
+              }
+              else{
                  Get.to(()=>const Feedbackform());
               }
             },

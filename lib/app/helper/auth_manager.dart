@@ -4,7 +4,7 @@ import 'package:school_management_app/app/helper/cache_manager.dart';
 class AuthenticationManager extends GetxController with CacheManager {
   final isLogged = false.obs;
 
-  logOut() {
+  void logOut() {
     isLogged.value = false;
     removeToken();
   }
@@ -15,9 +15,9 @@ class AuthenticationManager extends GetxController with CacheManager {
     await saveToken(token);
   }
 
-  void checkLoginStatus() async {
-    final token = await getToken();
-    if (token!='') {
+  void checkLoginStatus() {
+    final token = getToken();
+    if (token != null) {
       isLogged.value = true;
     }
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:school_management_app/app/common/read_write.dart';
 import 'package:school_management_app/app/helper/auth_manager.dart';
 import 'package:school_management_app/app/modules/auth/views/login_screen.dart';
 
@@ -17,9 +18,9 @@ customDialogBox(context,){
   return TextButton(
       child: const Text("Leave now",style: TextStyle(color: Colors.red),),
       onPressed:(){
-       bool sucess= authManager.logOut();
-       if(sucess==true){
-        Get.off(()=>const LoginScreen());
+     var removed=  remove('apiToken');
+       if(removed==null){
+        Get.offAll(()=>const LoginScreen());
        }
       } ,
     );}
