@@ -215,6 +215,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       hasNavigation: true,
                     ),
                     ProfileListItem(
+                      color: primaryColor,
+                      icon: LineAwesomeIcons.lightbulb,
+                      text: 'BioMetric'.tr,
+                      iconWidget: AnimatedSwitch(  
+                        value:read('biometricsEnabled')?? biometrics,  
+                        onChanged: (value) {
+                          setState(() {
+                              biometrics = value;
+                            });
+                            write('biometricsEnabled', biometrics);
+                          },
+                        height: 30,
+                        textOn: "on",
+                        colorOff: lWhite,
+                        indicatorColor:biometrics==true? white:black,
+                        colorOn: black,
+                        textOff: "off",
+                        textStyle:TextStyle(
+                          color: biometrics==true? white:black, fontSize: 15),
+                      ),
+                      hasNavigation: true,
+                    ),
+                    ProfileListItem(
                       icon: LineAwesomeIcons.question_circle,
                       text: 'help and support'.tr
                     ),

@@ -99,7 +99,7 @@ class _AttendencePageState extends State<AttendencePage> {
               ),
             ),
           ),
-          Card(
+          Card( 
             color: Colors.red,
            shape: RoundedRectangleBorder(
               side: BorderSide(color: primaryColor.withOpacity(0.2), width: 1),
@@ -108,7 +108,6 @@ class _AttendencePageState extends State<AttendencePage> {
             elevation: 3.0,
             child: InkWell(
               onTap: () {
-               
               },
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,

@@ -20,7 +20,7 @@ customDialogBox(context,){
       onPressed:(){
      var removed=  remove('apiToken');
        if(removed==null){
-        Get.offAll(()=>const LoginScreen());
+        Get.to(()=>const LoginScreen());
        }
       } ,
     );}

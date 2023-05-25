@@ -1,5 +1,5 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:school_management_app/app/common/read_write.dart';
@@ -7,6 +7,7 @@ import 'package:school_management_app/app/common/toast_message.dart';
 import 'package:school_management_app/app/helper/auth_manager.dart';
 import 'package:school_management_app/app/modules/auth/views/repo.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:school_management_app/app/modules/home/views/home_screen.dart';
 
 class AuthController extends GetxController {
   RxBool isLoading = false.obs;
@@ -26,6 +27,7 @@ class AuthController extends GetxController {
         write('loginInfopassword',  password);
       if(response != null){
         loginResponse = response;
+        Get.to(()=>const HomeScreen());
         write('loginInfoemail',  loginResponse.data.data.user.email);
         write('apiToken', loginResponse.data.token);
          authManager.login( loginResponse.data.token);
@@ -46,7 +48,7 @@ class AuthController extends GetxController {
     final bool canAuthenticate = canAuthenticateWithBiometrics || await auth.isDeviceSupported();
     var biometricsEnabled = read('biometricsEnabled') == "" ? false : read('biometricsEnabled') == false ? false : true;
     canAuthenticateWithBio = canAuthenticate;
-    if(canAuthenticate && biometricsEnabled) {
+    if(canAuthenticate&&biometricsEnabled) {
       canUseBiometic = true;
     } else {
       canUseBiometic = false;
@@ -57,14 +59,18 @@ class AuthController extends GetxController {
     try {
       final bool didAuthenticate = await auth.authenticate(
         localizedReason: 'Please authenticate to login',
-        options: const AuthenticationOptions(useErrorDialogs: false)
+        options: const AuthenticationOptions(useErrorDialogs: true, biometricOnly: true)
       );
       if(didAuthenticate) {
-        var data = read('loginInfo');
-        await getLogin(data['official_email'], data['password'],);
+        var datamail = read('loginInfoemail');
+        var datapassword = read('loginInfopassword');
+        await getLogin(datamail, datapassword,);
       }
     // ignore: empty_catches
-    } on PlatformException {
+    } on PlatformException catch (e) {
+      if (kDebugMode) {
+        print(e.toString());
+      }
     }
   }
  

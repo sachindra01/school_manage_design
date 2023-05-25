@@ -129,6 +129,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.0"
+  dropdown_plus:
+    dependency: "direct main"
+    description:
+      name: dropdown_plus
+      sha256: "707c364066dcfcd2f5b672116d5adee8e3454ede3ff6fc34f5b351bfbbfbecbe"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.9"
   enum_to_string:
     dependency: transitive
     description:
@@ -424,6 +432,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.8.0"
+  nepali_date_picker:
+    dependency: "direct main"
+    description:
+      name: nepali_date_picker
+      sha256: d74e0237a63c0b43b53ab82e1bf6e30423bfd15c6abea208147abad405012b39
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.3.1"
+  nepali_utils:
+    dependency: transitive
+    description:
+      name: nepali_utils
+      sha256: "76e896b08270c8f0e9365cf2ce9f8f5cd0fcd47b29d3b4baedef3ce88b7126a2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.3"
   octo_image:
     dependency: transitive
     description:

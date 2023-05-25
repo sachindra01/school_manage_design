@@ -1,8 +1,10 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:school_management_app/app/common/custom_appbar.dart';
 import 'package:school_management_app/app/common/style.dart';
+import 'package:school_management_app/app/modules/leave/add_leave_page.dart';
 import 'package:school_management_app/app/modules/leave/all_leave_page.dart';
 import 'package:school_management_app/app/modules/leave/casual_leave.dart';
 import 'package:school_management_app/app/modules/leave/sick_leave.dart';
@@ -37,6 +39,22 @@ class _LeavePageState extends State<LeavePage> with SingleTickerProviderStateMix
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: InkWell(
+        onTap: (){
+          Get.to(()=>const LeaveForm());
+        },
+        child: Container(
+            decoration: BoxDecoration(
+            color: primaryColor,
+            border: Border.all(
+              color:greyColor,
+            ),
+            borderRadius: const BorderRadius.all(Radius.circular(60))
+          ),
+          height: 60,
+          width: 60,
+          child: const Icon(Icons.add,color: lWhite,size: 25,)),
+      ),
       appBar: defaultAppbar(
         context,
           title: const Text(

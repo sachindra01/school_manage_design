@@ -69,7 +69,7 @@ class _FeedbackformState extends State<Feedbackform> {
                     fillColor: const Color(0xFFF7F8F9),
                     hintStyle: const TextStyle(
                         color: Colors.black,
-                        fontWeight: FontWeight.bold),
+                        fontWeight: FontWeight.bold), 
 
                   ),
                   const SizedBox(height: 16),

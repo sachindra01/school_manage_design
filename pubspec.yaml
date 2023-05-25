@@ -51,8 +51,10 @@ dependencies:
   flag: ^6.0.0
   cached_network_image: ^3.2.3
   image_picker: ^0.8.7+5
+  dropdown_plus: ^0.0.9
   table_calendar: ^3.0.9
   local_auth: ^2.1.6
+  nepali_date_picker: ^5.3.1
 
 flutter_icons:
   android: true

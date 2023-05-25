@@ -46,7 +46,7 @@ class CustomTextField extends StatelessWidget {
     this.border,
     this.enabledBorder,
     this.autofillHints,
-    this.textCapitalization,
+    this.textCapitalization, this.readonly,
   }) : super(key: key);
 
   final BuildContext context;
@@ -91,6 +91,7 @@ class CustomTextField extends StatelessWidget {
   final InputBorder? enabledBorder;
   final Iterable<String>? autofillHints;
   final TextCapitalization? textCapitalization;
+  final bool?readonly;
 
   @override
   Widget build(BuildContext context) {
@@ -111,6 +112,7 @@ class CustomTextField extends StatelessWidget {
       focusNode: focusNode,
       autovalidateMode: autovalidateMode ?? AutovalidateMode.onUserInteraction,
       onChanged: onChanged,
+      readOnly:readonly?? false,
       validator: validator,
       cursorColor: cursorColor ?? textColor,
       cursorHeight: cursorHeight ?? 22,
