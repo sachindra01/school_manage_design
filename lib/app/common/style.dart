@@ -18,7 +18,7 @@ const lTimeSaleIndicatorColor = Color(0xffF2F2E6);
 const lDividerColor2 = Color(0xFFEDEDED);
 const lBlue = Color(0xFF0A84FF);
 const lRed = Color(0xffB91B33);
-const primaryColor = Color.fromARGB(220, 46, 36, 72);
+const primaryColor =Color.fromARGB(220, 46, 36, 72);
 const secondaryColor = Color(0xFFbbbbbb);
 const appbarBackgroundColor = Color(0xFFeedebb);
 const detailColor = Color(0xFF595757);
@@ -35,6 +35,18 @@ const buttonColor = Color(0xFFC6AC45);
 const newsDateColor = Color(0xFFBC0000);
 const homeMenuTextColor = Color(0xFFb37963);
 const greyColor = Color(0xffeedebb);
+const primaryColors =LinearGradient(
+            // colors: [Colors.deepPurple, Colors.purple],
+            // begin: Alignment.topCenter,
+            // end: Alignment.bottomCenter,
+            colors: [
+              Color.fromARGB(220, 46, 36, 72),
+            // Color.fromARGB(255, 230, 149, 45),
+            Color.fromARGB(255, 223, 104, 144),
+              ],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+          );
 
 const yellow = Color(0xfff7c844);
 // const bgColor = Color(0xfff8f7f3);

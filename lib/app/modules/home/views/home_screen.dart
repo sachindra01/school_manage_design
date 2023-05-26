@@ -1,15 +1,11 @@
 // ignore_for_file: unnecessary_const
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:school_management_app/app/common/carousel_slider.dart';
 import 'package:school_management_app/app/common/custom_appbar.dart';
 import 'package:school_management_app/app/common/style.dart';
 import 'package:school_management_app/app/modules/attendence/attendence.dart';
-import 'package:school_management_app/app/modules/leave/leave_design.dart';
-import 'package:school_management_app/app/modules/notification/notification_screen.dart';
-import 'package:school_management_app/app/modules/profile/views/profile_screen.dart';
+import 'package:school_management_app/app/modules/leave/leave.dart';
 import 'package:school_management_app/app/modules/unauthorise_module/feedback/feedback_screen.dart';
 import 'package:school_management_app/app/modules/unauthorise_module/staff_hierachy/staff_hierachy_screen.dart';
 
@@ -110,36 +106,30 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: defaultAppbar(
         context,
         ontap: (){},
-        title: const Text('DashBoard'),
+        title: const Text('Home'),
         action: [
-          InkWell(
-            onTap: (){
-              Get.to(()=>const NotificationScreen());
-            },
-            child: const Icon(LineAwesomeIcons.bell,size: 30.0,)
-          ),
         ],
         autoImplying: true,
-        leadingIcon: InkWell(
-            onTap: (){
-              Get.to(()=>const ProfileScreen());
-            },
-            child: CircleAvatar(
-              radius:15,
-              backgroundColor: lBlack,
-              child: Padding(
-                padding: const EdgeInsets.all(2), // Border radius
-                child:
-                    ClipOval(child: Image.asset('assets/img/person1.png')),
-              ),
-            ),
-          ),
+        leadingIcon: const SizedBox()
         ),
-      body:SingleChildScrollView(
-        physics: const NeverScrollableScrollPhysics(),
-        child: Container(
-          color: primaryColor,
-          height: MediaQuery.of(context).size.height,
+      body:Container(
+         decoration: const BoxDecoration(
+            gradient: LinearGradient(
+            // colors: [Colors.deepPurple, Colors.purple],
+            // begin: Alignment.topCenter,
+            // end: Alignment.bottomCenter,
+            colors: [
+              Color.fromARGB(220, 46, 36, 72),
+            // Color.fromARGB(255, 230, 149, 45),
+            Color.fromARGB(255, 223, 104, 144),
+              ],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+          ),
+          ),
+        height: MediaQuery.of(context).size.height,
+        child: SingleChildScrollView(
+          physics: const NeverScrollableScrollPhysics(),
           child: Column(
             children: [
               const SizedBox(
@@ -149,33 +139,35 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(
                 height: 50,
               ),
-              Container(
-                height: 500.h,
-                decoration: const BoxDecoration(
-                 borderRadius:  BorderRadius.only(
-                  topLeft: Radius.circular(40.0),
-                  topRight:  Radius.circular(40.0),
-                  bottomLeft: Radius.circular(40.0),
-                  bottomRight: Radius.circular(40.0),
-              
-                ),
-                color: lWhite),
-                width: MediaQuery.of(context).size.width,
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(18.0),
-                      child: menuGridView(),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    )
-                  ]),
+              SingleChildScrollView(
+                child: Container(
+                   height: MediaQuery.of(context).size.height*0.5,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                          borderRadius: BorderRadius.circular(16),
+                          boxShadow: const [
+                            BoxShadow(
+                                blurRadius: 8, color: lBlack, offset: Offset(2, 2))
+                          ]
+                      ),
+                  width: MediaQuery.of(context).size.width,
+                  child: SingleChildScrollView(
+                    physics: const BouncingScrollPhysics(),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(18.0),
+                        child: menuGridView(),
+                      ),
+                      const SizedBox(
+                        height: 40,
+                      )
+                    ]),
+                  ),
                 ),
               )
             ],
@@ -191,16 +183,19 @@ class _HomeScreenState extends State<HomeScreen> {
       itemCount: choices.length,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,
-          crossAxisSpacing: 4.0,
-          mainAxisSpacing: 4.0,
-          childAspectRatio:0.8),
+          crossAxisSpacing: 6.0,
+          mainAxisSpacing: 6.0,
+          childAspectRatio:0.9),
       itemBuilder: (BuildContext context, int index) {
-        return Card(
-         shape: RoundedRectangleBorder(
-            side: BorderSide(color: primaryColor.withOpacity(0.2), width: 1),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          elevation: 3.0,
+        return Container(
+           decoration: BoxDecoration(
+              color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: const [
+                  BoxShadow(
+                      blurRadius: 8, color: primaryColor, offset: Offset(2, 2))
+                ]
+            ),
           child: InkWell(
             onTap: () {
               if (choices[index].id == 1) {

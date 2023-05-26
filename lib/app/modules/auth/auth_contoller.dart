@@ -7,7 +7,7 @@ import 'package:school_management_app/app/common/toast_message.dart';
 import 'package:school_management_app/app/helper/auth_manager.dart';
 import 'package:school_management_app/app/modules/auth/views/repo.dart';
 import 'package:local_auth/local_auth.dart';
-import 'package:school_management_app/app/modules/home/views/home_screen.dart';
+import 'package:school_management_app/bottom_nav.dart';
 
 class AuthController extends GetxController {
   RxBool isLoading = false.obs;
@@ -27,7 +27,9 @@ class AuthController extends GetxController {
         write('loginInfopassword',  password);
       if(response != null){
         loginResponse = response;
-        Get.to(()=>const HomeScreen());
+        Get.off(()=>const BottomNavbar(
+          index: 2,
+        ));
         write('loginInfoemail',  loginResponse.data.data.user.email);
         write('apiToken', loginResponse.data.token);
          authManager.login( loginResponse.data.token);

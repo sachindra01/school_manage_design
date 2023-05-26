@@ -34,8 +34,20 @@ class ProfileListItem extends StatelessWidget {
         horizontal: kSpacingUnit.w * 2,
       ),
       decoration: BoxDecoration(
+         boxShadow: const [
+                BoxShadow(
+                    blurRadius: 8, color: Colors.grey, offset: Offset(2, 2))
+              ],
         borderRadius: BorderRadius.circular(kSpacingUnit.w * 3),
-        color:color?? primaryColor,
+        gradient: const LinearGradient(
+                colors: [
+                  Color.fromARGB(220, 46, 36, 72),
+                // Color.fromARGB(255, 230, 149, 45),
+                Color.fromARGB(255, 223, 104, 144),
+                  ],
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+              ),
       ),
       child: Row(
         children: <Widget>[

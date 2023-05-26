@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_management_app/app/common/read_write.dart';
 import 'package:school_management_app/app/helper/auth_manager.dart';
+import 'package:school_management_app/app/modules/auth/auth_contoller.dart';
 import 'package:school_management_app/app/modules/auth/views/login_screen.dart';
 
   final AuthenticationManager authManager=AuthenticationManager();
+    final AuthController _authController =Get.put(AuthController());
 customDialogBox(context,){
   return showDialog(
     context: context, 
@@ -17,9 +19,10 @@ customDialogBox(context,){
  okButton(context){
   return TextButton(
       child: const Text("Leave now",style: TextStyle(color: Colors.red),),
-      onPressed:(){
+      onPressed:()async{
      var removed=  remove('apiToken');
        if(removed==null){
+       await _authController.canUseBiometric();
         Get.to(()=>const LoginScreen());
        }
       } ,

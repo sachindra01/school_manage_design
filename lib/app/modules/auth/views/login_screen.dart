@@ -55,10 +55,24 @@ class _LoginScreenState extends State<LoginScreen> {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-        backgroundColor: primaryColor,
         body: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
           child: Container(
+            decoration:const BoxDecoration(
+               gradient: LinearGradient(
+            // colors: [Colors.deepPurple, Colors.purple],
+            // begin: Alignment.topCenter,
+            // end: Alignment.bottomCenter,
+            colors: [
+              Color.fromARGB(220, 46, 36, 72),
+            // Color.fromARGB(255, 230, 149, 45),
+            Color.fromARGB(255, 223, 104, 144),
+              ],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+          ),
+            ),
+            
             height: MediaQuery.of(context).size.height,
             width: double.infinity,
             padding: const EdgeInsets.all(16.0),
@@ -97,185 +111,177 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     const SizedBox(height: 37.0),
-                    Card(
-                      shape: RoundedRectangleBorder(
-                        side: BorderSide(
-                            color: primaryColor.withOpacity(0.2), width: 1),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      elevation: 3.0,
-                      child: Container(
-                        decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(20.0),
-                                topRight: Radius.circular(20.0),
-                                bottomLeft: Radius.circular(20.0),
-                                bottomRight: Radius.circular(20.0)),
-                            color: lWhite,
-                            boxShadow: []),
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Column(
-                            children: [
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              Form(
-                                key: formKey,
-                                child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      CustomTextField(
-                                        prefixIcon: const Icon(
-                                          LineAwesomeIcons.envelope,
+                    Container(
+                       decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(16),
+                          boxShadow: const [
+                            BoxShadow(
+                                blurRadius: 8, color: black, offset: Offset(2, 2))
+                          ]
+                        ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Column(
+                          children: [
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Form(
+                              key: formKey,
+                              child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    CustomTextField(
+                                      prefixIcon: const Icon(
+                                        LineAwesomeIcons.envelope,
+                                        color: primaryColor,
+                                      ),
+                                      autoFocus: false,
+                                      autovalidateMode:
+                                          AutovalidateMode.onUserInteraction,
+                                      textInputAction: TextInputAction.next,
+                                      keyboardType: TextInputType.emailAddress,
+                                      validator: (value) {
+                                        final regex = RegExp(
+                                            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+                                        if (value!.isEmpty) {
+                                          return 'Fill empty field !';
+                                        } else if (!regex.hasMatch(value)) {
+                                          return 'Invalid Email.!';
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      context: context,
+                                      focusNode: _emailfocusNode,
+                                      errorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(15),
+                                        borderSide: const BorderSide(
+                                          color: Colors.red,
+                                        ),
+                                      ),
+                                      controller: emailCtr,
+                                      textCapitalization: TextCapitalization.none,
+                                      borderColor: const Color(0xFFD5DDE0),
+                                      border: const OutlineInputBorder(
+                                        borderSide: BorderSide.none,
+                                      ),
+                                      borderRadius: 15,
+                                      fillColor: const Color(0xFFF7F8F9),
+                                      hintStyle: const TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold),
+                                      hintText: 'Email',
+                                    ),
+                                    const SizedBox(height: 16),
+                                    CustomTextField(
+                                      obscureText: obscureText,
+                                      suffixIcon: InkWell(
+                                        onTap: (() {
+                                          setState(() {
+                                            obscureText = !obscureText;
+                                          });
+                                        }),
+                                        child: Icon(
+                                          obscureText == true
+                                              ? LineAwesomeIcons.eye_slash
+                                              : LineAwesomeIcons.eye,
                                           color: primaryColor,
                                         ),
-                                        autoFocus: false,
-                                        autovalidateMode:
-                                            AutovalidateMode.onUserInteraction,
-                                        textInputAction: TextInputAction.next,
-                                        keyboardType: TextInputType.emailAddress,
-                                        validator: (value) {
-                                          final regex = RegExp(
-                                              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-                                          if (value!.isEmpty) {
-                                            return 'Fill empty field !';
-                                          } else if (!regex.hasMatch(value)) {
-                                            return 'Invalid Email.!';
-                                          } else {
-                                            return null;
-                                          }
-                                        },
-                                        context: context,
-                                        focusNode: _emailfocusNode,
-                                        errorBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(15),
-                                          borderSide: const BorderSide(
-                                            color: Colors.red,
-                                          ),
-                                        ),
-                                        controller: emailCtr,
-                                        textCapitalization: TextCapitalization.none,
-                                        borderColor: const Color(0xFFD5DDE0),
-                                        border: const OutlineInputBorder(
-                                          borderSide: BorderSide.none,
-                                        ),
-                                        borderRadius: 15,
-                                        fillColor: const Color(0xFFF7F8F9),
-                                        hintStyle: const TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold),
-                                        hintText: 'Email',
                                       ),
-                                      const SizedBox(height: 16),
-                                      CustomTextField(
-                                        obscureText: obscureText,
-                                        suffixIcon: InkWell(
-                                          onTap: (() {
-                                            setState(() {
-                                              obscureText = !obscureText;
-                                            });
-                                          }),
-                                          child: Icon(
-                                            obscureText == true
-                                                ? LineAwesomeIcons.eye_slash
-                                                : LineAwesomeIcons.eye,
-                                            color: primaryColor,
-                                          ),
-                                        ),
-                                        prefixIcon: const Icon(
-                                          LineAwesomeIcons.lock,
-                                          color: primaryColor,
-                                        ),
-                                        autoFocus: false,
-                                        autovalidateMode:
-                                            AutovalidateMode.onUserInteraction,
-                                        textInputAction: TextInputAction.done,
-                                        validator: (value) {
-                                          if (value!.isEmpty) {
-                                            return 'Fill empty field !';
-                                          } else if (value.isEmpty) {
-                                            return 'Invalid Email.!';
-                                          } else {
-                                            return null;
-                                          }
-                                        },
-                                        context: context,
-                                        focusNode: _passfocusNode,
-                                        errorBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(15),
-                                          borderSide: const BorderSide(
-                                            color: Colors.red,
-                                          ),
-                                        ),
-                                        controller: passwordCtr,
-                                        textCapitalization: TextCapitalization.none,
-                                        borderColor: const Color(0xFFD5DDE0),
-                                        border: const OutlineInputBorder(
-                                          borderSide: BorderSide.none,
-                                        ),
-                                        borderRadius: 15,
-                                        fillColor: const Color(0xFFF7F8F9),
-                                        hintStyle: const TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold),
-                                        hintText: 'password', 
+                                      prefixIcon: const Icon(
+                                        LineAwesomeIcons.lock,
+                                        color: primaryColor,
                                       ),
-                                      const SizedBox(height: 35),
-                                    ]),
-                              ),
-                              // SizedBox(
-                              //   child: _isLoading
-                              //       ? const Center(
-                              //           child: CircularProgressIndicator(
-                              //             color: primaryColor,
-                              //             backgroundColor: white,
-                              //           ),
-                              //         )
-                              //       : CustomButton(
-                              //           verticalPadding: 15,
-                              //           buttonText: 'Log In',
-                              //           textColor: lWhite,
-                              //           buttonColor: primaryColor,
-                              //           borderRadiusGeometry:
-                              //               BorderRadius.circular(40),
-                              //           onPressed: () async {
-                              //             Get.to(() => const HomeScreen());
-                              //             FocusManager.instance.primaryFocus
-                              //                 ?.unfocus();
-                              //             // setState(() {
-                              //             //   _isLoading = true;
-                              //             // });
-                              //             // if (formKey.currentState!.validate()) {}
+                                      autoFocus: false,
+                                      autovalidateMode:
+                                          AutovalidateMode.onUserInteraction,
+                                      textInputAction: TextInputAction.done,
+                                      validator: (value) {
+                                        if (value!.isEmpty) {
+                                          return 'Fill empty field !';
+                                        } else if (value.isEmpty) {
+                                          return 'Invalid Email.!';
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      context: context,
+                                      focusNode: _passfocusNode,
+                                      errorBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(15),
+                                        borderSide: const BorderSide(
+                                          color: Colors.red,
+                                        ),
+                                      ),
+                                      controller: passwordCtr,
+                                      textCapitalization: TextCapitalization.none,
+                                      borderColor: const Color(0xFFD5DDE0),
+                                      border: const OutlineInputBorder(
+                                        borderSide: BorderSide.none,
+                                      ),
+                                      borderRadius: 15,
+                                      fillColor: const Color(0xFFF7F8F9),
+                                      hintStyle: const TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold),
+                                      hintText: 'password', 
+                                    ),
+                                    const SizedBox(height: 35),
+                                  ]),
+                            ),
+                            // SizedBox(
+                            //   child: _isLoading
+                            //       ? const Center(
+                            //           child: CircularProgressIndicator(
+                            //             color: primaryColor,
+                            //             backgroundColor: white,
+                            //           ),
+                            //         )
+                            //       : CustomButton(
+                            //           verticalPadding: 15,
+                            //           buttonText: 'Log In',
+                            //           textColor: lWhite,
+                            //           buttonColor: primaryColor,
+                            //           borderRadiusGeometry:
+                            //               BorderRadius.circular(40),
+                            //           onPressed: () async {
+                            //             Get.to(() => const HomeScreen());
+                            //             FocusManager.instance.primaryFocus
+                            //                 ?.unfocus();
+                            //             // setState(() {
+                            //             //   _isLoading = true;
+                            //             // });
+                            //             // if (formKey.currentState!.validate()) {}
 
-                              //             // setState(() {
-                              //             //   _isLoading = false;
-                              //             // });
-                              //           },
-                              //           trailingIcon: const SizedBox(),
-                              //         ),
-                              // ),
-                              Obx(()=> 
-                             _authController.isLoading.value
-                             ? loadingWidget()
-                             : GradientButton(
-                                  text: "Login".tr,
-                                  height: 40.h,
-                                  width: 200.w,
-                                  borderRadius: 100.r,
-                                  onPressed: ()async{
-                                    if (formKey.currentState!.validate()) {
-                                     await _authController.getLogin(emailCtr.text, passwordCtr.text);
-                                    }
+                            //             // setState(() {
+                            //             //   _isLoading = false;
+                            //             // });
+                            //           },
+                            //           trailingIcon: const SizedBox(),
+                            //         ),
+                            // ),
+                            Obx(()=> 
+                           _authController.isLoading.value
+                           ? loadingWidget()
+                           : GradientButton(
+                                text: "Login".tr,
+                                height: 40.h,
+                                width: 200.w,
+                                borderRadius: 100.r,
+                                onPressed: ()async{
+                                  if (formKey.currentState!.validate()) {
+                                   await _authController.getLogin(emailCtr.text, passwordCtr.text);
                                   }
-                                ),
+                                }
                               ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              bioMetrics(context),
-                            ],
-                          ),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            bioMetrics(context),
+                          ],
                         ),
                       ),
                     ),

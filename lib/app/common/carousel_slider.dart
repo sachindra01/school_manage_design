@@ -8,8 +8,8 @@ Widget bannerCarouseSlider(context,height,width) {
       child: AnotherCarousel(
         overlayShadowColors: Colors.transparent,
         images: const [
-          ExactAssetImage("assets/img/logo.jpg"),
-          ExactAssetImage("assets/img/logo.jpg")
+          ExactAssetImage("assets/img/nature.jpg"),
+          ExactAssetImage("assets/img/nature.jpg")
         ],
         dotSpacing: 6.0,
         dotColor: Colors.lightGreenAccent,

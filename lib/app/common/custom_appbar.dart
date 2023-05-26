@@ -32,9 +32,24 @@ defaultAppbar(context,{Widget? title, List<Widget>? action, autoImplying,Widget 
         color: Colors.white, //change your color here
       ),
       automaticallyImplyLeading: autoImplying ?? true,
-      backgroundColor: primaryColor,
       centerTitle: true,
       actions: action,
+      flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+            // colors: [Colors.deepPurple, Colors.purple],
+            // begin: Alignment.topCenter,
+            // end: Alignment.bottomCenter,
+            colors: [
+              Color.fromARGB(220, 46, 36, 72),
+            // Color.fromARGB(255, 230, 149, 45),
+            Color.fromARGB(255, 223, 104, 144),
+              ],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+          ),
+          ),
+        ), 
       title: title ??
         Center(
           child: CircleAvatar(

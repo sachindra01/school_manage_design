@@ -39,40 +39,57 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: lWhite,
-      body: Column(
-        children: [
-          const SizedBox(
-            height: 250,
+      body: Container(
+        decoration: const BoxDecoration(
+            gradient: LinearGradient(
+            // colors: [Colors.deepPurple, Colors.purple],
+            // begin: Alignment.topCenter,
+            // end: Alignment.bottomCenter,
+            colors: [
+              Color.fromARGB(220, 46, 36, 72),
+            // Color.fromARGB(255, 230, 149, 45),
+            Color.fromARGB(255, 223, 104, 144),
+              ],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
           ),
-          CircleAvatar(
-              radius:80,
-              backgroundColor: lBlack,
-              child: Padding(
-                padding: const EdgeInsets.all(2), // Border radius
-                child:
-                    ClipOval(child: Image.asset('assets/img/logo.jpg')),
+          ),
+
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 250,
+            ),
+            CircleAvatar(
+                radius:80,
+                backgroundColor: lWhite,
+                child: Padding(
+                  padding: const EdgeInsets.all(2), // Border radius
+                  child:
+                      ClipOval(child: Image.asset('assets/img/logo.jpg')),
+                ),
               ),
+              const SizedBox(
+                height: 10,
+              ),
+              animatedText(),
+            Expanded(child: Container()),
+            TextButton(
+              style: TextButton.styleFrom(
+                textStyle: const TextStyle(
+                  fontSize: 20,
+                ),
+              ),
+              onPressed: () {},
+              child: const Text('Version 1.0.0',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 20, color:lWhite)),
             ),
             const SizedBox(
-              height: 10,
+              height: 50,
             ),
-            animatedText(),
-          Expanded(child: Container()),
-          TextButton(
-            style: TextButton.styleFrom(
-              textStyle: const TextStyle(
-                fontSize: 20,
-              ),
-            ),
-            onPressed: () {},
-            child: const Text('Version 1.0.0',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 20, color:primaryColor)),
-          ),
-          const SizedBox(
-            height: 50,
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -87,7 +104,7 @@ class _SplashScreenState extends State<SplashScreen> {
           WavyAnimatedText('DIGITALIZE YOUR SCHOOL...',
           speed: const Duration(milliseconds: 100),
           textStyle: const TextStyle(
-            color: primaryColor,
+            color: lWhite,
             fontWeight: FontWeight.bold
           )), 
         ],

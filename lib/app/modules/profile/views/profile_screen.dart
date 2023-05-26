@@ -23,7 +23,6 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
 
-  bool _isDarkMode = true;
   bool notification = false;
 
   bool biometrics = false;
@@ -34,7 +33,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
       child: Scaffold(
         appBar: defaultAppbar(
           context,
-          autoImplying: true,
+          autoImplying: false,
+          leadingIcon: const SizedBox(),
           title: Text(
             'profile'.tr,
             style: const TextStyle(
@@ -55,7 +55,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               painter: HeaderCurvedContainer(),
               child: SizedBox(
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height/1,
+                height: MediaQuery.of(context).size.height/0.5,
               ),
             ),
             Column(
@@ -83,8 +83,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       borderRadius: BorderRadius.circular(100.r),
                       child: Image.asset(
                         'assets/img/person1.png',
-                        height: 40.h,
-                        width: 40.w,
+                        height: 30.h,
+                        width: 30.w,
                       )
                     ),
                   ),
@@ -118,133 +118,123 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Card(
-          elevation: 2.0,
-          shape: RoundedRectangleBorder(
-              side: BorderSide(color: primaryColor.withOpacity(0.2), width: 1),
-              borderRadius: BorderRadius.circular(40.0),
+        child: Container(
+          height: 300.h,
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: const [
+                BoxShadow(
+                    blurRadius: 8, color: primaryColor, offset: Offset(2, 2))
+              ]
             ),
-          child: Container(
-            height: 400.h,
-            decoration: const BoxDecoration(
-              color: lWhite
-            ),
-                child: ListView(
-                  children: [
-                    const SizedBox(
-                      height: 20,
+              child: ListView(
+                children: [
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  ProfileListItem(
+                    icon: LineAwesomeIcons.user_shield,
+                    text: 'aboutUs'.tr,
+                  ),
+                  ProfileListItem(
+                    iconWidget:  DropdownButtonHideUnderline(
+                      child: DropdownButton(
+                        icon: const Icon(Icons.keyboard_arrow_down,color: lWhite,),
+                        borderRadius: BorderRadius.circular(0.0),
+                        items: language.map<DropdownMenuItem<String>>((val) {
+                          return DropdownMenuItem<String>(
+                            value: val,
+                            child: Row(
+                              children: [
+                               val=='English'
+                               ?Padding(
+                                 padding: const EdgeInsets.all(5.0),
+                                 child: Image.asset('assets/img/uk.png', height: 20,width: 20),
+                               )
+                               :Image.asset('assets/img/nepal.png', height: 15,width: 20,),
+                                Text(val),
+                              ],
+                            )
+                          );
+                        }).toList(), 
+                        onChanged: (newVal) {
+                            var locale = Locale(newVal == 'English' ? 'en' : 'np');
+                            write('lang', newVal == 'English' ? 'en' : 'np');
+                            Get.updateLocale(locale);
+                                        
+                        },
+                      )
                     ),
-                    ProfileListItem(
-                      icon: LineAwesomeIcons.user_shield,
-                      text: 'aboutUs'.tr,
+                    color: primaryColor,
+                    icon: LineAwesomeIcons.globe,
+                    text: 'language'.tr,
+                    hasNavigation: true,
+                  ),
+                  ProfileListItem(
+                    color: primaryColor,
+                    icon: LineAwesomeIcons.bell,
+                    text: 'notification'.tr,
+                    iconWidget: const AnimatedSwitch(    
+                      height: 30,
+                      textOn: "On",
+                      textOff: "Off",
+                      textStyle: TextStyle(color: Colors.white, fontSize: 15),
                     ),
-                    ProfileListItem(
-                      icon: LineAwesomeIcons.cog,
-                      text: 'settings'.tr
+                    hasNavigation: true,
+                  ),
+                  // ProfileListItem(
+                  //   color: primaryColor,
+                  //   icon: LineAwesomeIcons.lightbulb,
+                  //   text: 'Theme'.tr,
+                  //   iconWidget: AnimatedSwitch(  
+                  //     value: _isDarkMode,  
+                  //     onChanged: (value) {
+                  //         Get.changeThemeMode(
+                  //           _isDarkMode ? ThemeMode.light : ThemeMode.dark,
+                  //         );
+                  //         setState(() {
+                  //           _isDarkMode = !_isDarkMode;
+                  //         });
+                  //         write('isDarkMode', _isDarkMode);
+                  //       },
+                  //     height: 30,
+                  //     textOn: "light",
+                  //     colorOff: lBlack,
+                  //     indicatorColor:_isDarkMode==true? white:black,
+                  //     colorOn: lWhite,
+                  //     textOff: "dark",
+                  //     textStyle:TextStyle(
+                  //       color: _isDarkMode==true? white:black, fontSize: 15),
+                  //   ),
+                  //   hasNavigation: true,
+                  // ),
+                  ProfileListItem(
+                    color: primaryColor,
+                    icon: LineAwesomeIcons.lightbulb,
+                    text: 'BioMetric'.tr,
+                    iconWidget: AnimatedSwitch(  
+                      value:read('biometricsEnabled')==''? false:read('biometricsEnabled'),  
+                      onChanged: (value) {
+                        setState(() {
+                            biometrics = value;
+                          });
+                          write('biometricsEnabled', biometrics);
+                        },
+                      height: 30,
+                      textOn: "on",
+                      colorOff: lWhite,
+                      indicatorColor:biometrics==true? white:black,
+                      colorOn: black,
+                      textOff: "off",
+                      textStyle:TextStyle(
+                        color: biometrics==true? white:black, fontSize: 15),
                     ),
-                    ProfileListItem(
-                      iconWidget:  DropdownButtonHideUnderline(
-                        child: DropdownButton(
-                          icon: const Icon(Icons.keyboard_arrow_down,color: lWhite,),
-                          borderRadius: BorderRadius.circular(0.0),
-                          items: language.map<DropdownMenuItem<String>>((val) {
-                            return DropdownMenuItem<String>(
-                              value: val,
-                              child: Row(
-                                children: [
-                                 val=='English'
-                                 ?Padding(
-                                   padding: const EdgeInsets.all(5.0),
-                                   child: Image.asset('assets/img/uk.png', height: 20,width: 20),
-                                 )
-                                 :Image.asset('assets/img/nepal.png', height: 15,width: 20,),
-                                  Text(val),
-                                ],
-                              )
-                            );
-                          }).toList(), 
-                          onChanged: (newVal) {
-                              var locale = Locale(newVal == 'English' ? 'en' : 'np');
-                              write('lang', newVal == 'English' ? 'en' : 'np');
-                              Get.updateLocale(locale);
-                                          
-                          },
-                        )
-                      ),
-                      color: primaryColor,
-                      icon: LineAwesomeIcons.globe,
-                      text: 'language'.tr,
-                      hasNavigation: true,
-                    ),
-                    ProfileListItem(
-                      color: primaryColor,
-                      icon: LineAwesomeIcons.bell,
-                      text: 'notification'.tr,
-                      iconWidget: const AnimatedSwitch(    
-                        height: 30,
-                        textOn: "On",
-                        textOff: "Off",
-                        textStyle: TextStyle(color: Colors.white, fontSize: 15),
-                      ),
-                      hasNavigation: true,
-                    ),
-                    ProfileListItem(
-                      color: primaryColor,
-                      icon: LineAwesomeIcons.lightbulb,
-                      text: 'Theme'.tr,
-                      iconWidget: AnimatedSwitch(  
-                        value: _isDarkMode,  
-                        onChanged: (value) {
-                            Get.changeThemeMode(
-                              _isDarkMode ? ThemeMode.light : ThemeMode.dark,
-                            );
-                            setState(() {
-                              _isDarkMode = !_isDarkMode;
-                            });
-                            write('isDarkMode', _isDarkMode);
-                          },
-                        height: 30,
-                        textOn: "light",
-                        colorOff: lBlack,
-                        indicatorColor:_isDarkMode==true? white:black,
-                        colorOn: lWhite,
-                        textOff: "dark",
-                        textStyle:TextStyle(
-                          color: _isDarkMode==true? white:black, fontSize: 15),
-                      ),
-                      hasNavigation: true,
-                    ),
-                    ProfileListItem(
-                      color: primaryColor,
-                      icon: LineAwesomeIcons.lightbulb,
-                      text: 'BioMetric'.tr,
-                      iconWidget: AnimatedSwitch(  
-                        value:read('biometricsEnabled')?? biometrics,  
-                        onChanged: (value) {
-                          setState(() {
-                              biometrics = value;
-                            });
-                            write('biometricsEnabled', biometrics);
-                          },
-                        height: 30,
-                        textOn: "on",
-                        colorOff: lWhite,
-                        indicatorColor:biometrics==true? white:black,
-                        colorOn: black,
-                        textOff: "off",
-                        textStyle:TextStyle(
-                          color: biometrics==true? white:black, fontSize: 15),
-                      ),
-                      hasNavigation: true,
-                    ),
-                    ProfileListItem(
-                      icon: LineAwesomeIcons.question_circle,
-                      text: 'help and support'.tr
-                    ),
-                  ],
-                ),
-                ),
-        ),
+                    hasNavigation: true,
+                  ),
+                ],
+              ),
+              ),
       ),
     );
   }
@@ -261,13 +251,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
           height: 40,
           width: 40,
           decoration: BoxDecoration(
-            color: lRed,
-            border: Border.all(
-              color:lRed,
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(40),
+              boxShadow: const [
+                BoxShadow(
+                    blurRadius: 8, color: primaryColor, offset: Offset(2, 2))
+              ]
             ),
-            borderRadius: const BorderRadius.all(Radius.circular(60))
-          ),
-          child: const Icon(LineAwesomeIcons.alternate_sign_out,),
+          child: const Icon(LineAwesomeIcons.alternate_sign_out,color: lRed,),
         ),
       ),
     );
