@@ -7,10 +7,10 @@ import 'package:school_management_app/app/common/constant.dart';
 import 'package:school_management_app/app/common/curved_shape.dart';
 import 'package:school_management_app/app/common/custom_appbar.dart';
 import 'package:school_management_app/app/common/custom_dailogbox.dart';
-import 'package:school_management_app/app/common/gradient_button.dart';
 import 'package:school_management_app/app/common/profile_list.dart';
 import 'package:school_management_app/app/common/read_write.dart';
 import 'package:school_management_app/app/common/style.dart';
+import 'package:school_management_app/app/modules/auth/auth_contoller.dart';
 
 class ProfileScreen extends StatefulWidget {
 
@@ -26,6 +26,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   bool notification = false;
 
   bool biometrics = false;
+   final AuthController _authController =Get.put(AuthController());
 
   @override
   Widget build(BuildContext context) {
@@ -89,22 +90,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                 ),
-              //UserName
-              Text('CODENT ACADEMIC SOFTWARE'.tr),
-              //User Email
-              const Text('codent@gmail.com', ),
-              SizedBox(height: 10.h,),
-              //Edit Profile Button
-              GradientButton(
-                text: "editProfile".tr,
-                height: 35.h,
-                borderRadius: 100.r,
-                onPressed: (){
-                  // Get.to(()=> EditProfilePage(
-                  //   userData: _authCon.userProfileData!,
-                  // ));
+              GetBuilder(
+                init: AuthController(),
+                builder: (context) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                        //UserName
+                    Text(_authController.loginResponse.data.data.user.name.toString()),
+                    //User Email
+                    Text(_authController.loginResponse.data.data.user.email.toString()),
+                    SizedBox(height: 10.h,),
+                    ],
+                  );
                 }
               ),
+              const SizedBox(
+                height: 10,
+              ),
+              //Edit Profile Button
                 profileMenu(),
               ],
             ),

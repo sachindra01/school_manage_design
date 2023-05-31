@@ -17,6 +17,7 @@ class AuthController extends GetxController {
   var billingDate;
   bool canAuthenticateWithBio = false;
   bool canUseBiometic = false;
+ final RxString selectedDate = ''.obs;
   final AuthenticationManager authManager=AuthenticationManager();
 
 
@@ -32,6 +33,7 @@ class AuthController extends GetxController {
         ));
         write('loginInfoemail',  loginResponse.data.data.user.email);
         write('apiToken', loginResponse.data.token);
+        write('country', loginResponse.data.data.user.country);
          authManager.login( loginResponse.data.token);
 
          showToastMessage(loginResponse.message);
