@@ -8,6 +8,7 @@ import 'package:school_management_app/app/common/gradient_button.dart';
 import 'package:school_management_app/app/common/loading_widget.dart';
 import 'package:school_management_app/app/common/style.dart';
 import 'package:school_management_app/app/modules/auth/auth_contoller.dart';
+import 'package:school_management_app/bottom_nav.dart';
 
 // ignore: unused_import
 
@@ -271,9 +272,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 width: 200.w,
                                 borderRadius: 100.r,
                                 onPressed: ()async{
-                                  if (formKey.currentState!.validate()) {
-                                   await _authController.getLogin(emailCtr.text, passwordCtr.text);
-                                  }
+                                 Get.off(()=>const BottomNavbar(index: 2));
                                 }
                               ),
                             ),

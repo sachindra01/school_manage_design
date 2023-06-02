@@ -5,8 +5,8 @@ import 'package:school_management_app/app/common/carousel_slider.dart';
 import 'package:school_management_app/app/common/custom_appbar.dart';
 import 'package:school_management_app/app/common/style.dart';
 import 'package:school_management_app/app/modules/attendence/attendence.dart';
-import 'package:school_management_app/app/modules/home/activity_screen.dart';
 import 'package:school_management_app/app/modules/leave/leave.dart';
+import 'package:school_management_app/app/modules/unauthorise_module/about_us.dart';
 // ignore: unused_import
 import 'package:school_management_app/app/modules/unauthorise_module/feedback/feedback_screen.dart';
 import 'package:school_management_app/app/modules/unauthorise_module/staff_hierachy/staff_hierachy_screen.dart';
@@ -203,14 +203,14 @@ class _HomeScreenState extends State<HomeScreen> {
               if (choices[index].id == 1) {
                 Get.to(()=>const AttendencePage());
                
-              } else if (choices[index].id == 4){
+              } else if (choices[index].id == 2){
                   Get.to(()=>const LeavePage());
                 
               }else if (choices[index].id == 3){
                   Get.to(()=>const StaffDetail());
                 
-              }else if (choices[index].id == 2){
-                  Get.to(()=>const ActivityScreen());
+              }else if (choices[index].id == 4){
+                  Get.to(()=>const AboutUsScreen());
                 
               }
              
