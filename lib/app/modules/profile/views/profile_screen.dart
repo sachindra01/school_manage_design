@@ -1,4 +1,5 @@
 import 'package:animated_switch/animated_switch.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -26,7 +27,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   bool notification = false;
 
   bool biometrics = false;
-   final AuthController _authController =Get.put(AuthController());
 
   @override
   Widget build(BuildContext context) {
@@ -97,9 +97,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                         //UserName
-                    Text(_authController.loginResponse.data.data.user.name.toString()),
+                    Text(read('loginInfoemail')),
                     //User Email
-                    Text(_authController.loginResponse.data.data.user.email.toString()),
+                    Text(read('loginInfoemail')),
                     SizedBox(height: 10.h,),
                     ],
                   );
@@ -175,18 +175,42 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     text: 'language'.tr,
                     hasNavigation: true,
                   ),
-                  ProfileListItem(
-                    color: primaryColor,
-                    icon: LineAwesomeIcons.bell,
-                    text: 'notification'.tr,
-                    iconWidget: const AnimatedSwitch(    
-                      height: 30,
-                      textOn: "On",
-                      textOff: "Off",
-                      textStyle: TextStyle(color: Colors.white, fontSize: 15),
-                    ),
-                    hasNavigation: true,
-                  ),
+                    StreamBuilder<QuerySnapshot>(
+                      stream: FirebaseFirestore.instance.collection("UserList").snapshots(),
+                    builder: (context,snapshot) {
+                       if (!snapshot.hasData) {
+                          return  SizedBox(
+                              height: MediaQuery.of(context).size.height - kToolbarHeight,
+                              child: const Center(child: CircularProgressIndicator( color: Colors.black,),),
+                            );
+                          } else {
+                            List<QueryDocumentSnapshot<Object?>> userList = snapshot.data!.docs;
+                              return ProfileListItem(
+                                color: primaryColor,
+                                icon: LineAwesomeIcons.bell,
+                                text: 'notification'.tr,
+                                iconWidget:  AnimatedSwitch(  
+                                  value:userList[0]["isNotification"] ?? true,  
+                                    onChanged: (value) {
+                                      setState(() {
+                                        FirebaseFirestore.instance.collection("UserList").doc(read('userId').toString()).update(
+                                          {'isNotification' : value}
+                                        );
+                                      });
+                                    },
+                                    height: 30,
+                                    textOn: "on",
+                                    colorOff: lRed,
+                                    indicatorColor:userList[0]["isNotification"] ==true? white:black,
+                                    colorOn: Colors.green,
+                                    textOff: "off",
+                                    textStyle:TextStyle(
+                                      color:userList[0]["isNotification"] ==true? white:black, fontSize: 15),
+                                 ),
+                                hasNavigation: true,
+                              );
+                    }
+   } ),
                   // ProfileListItem(
                   //   color: primaryColor,
                   //   icon: LineAwesomeIcons.lightbulb,

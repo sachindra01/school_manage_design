@@ -57,6 +57,18 @@ dependencies:
   table_calendar: ^3.0.9
   local_auth: ^2.1.6
   nepali_date_picker: ^5.3.1
+  cloud_firestore: ^4.8.0
+  firebase_core: ^2.13.1
+  firebase_messaging: ^14.1.1
+  firebase_auth: ^4.1.1
+  timeago: ^3.3.0
+  flutter_local_notifications: ^9.5.3+1
+  open_file: ^3.2.1
+  shimmer: ^2.0.0
+  #File Picker
+  file_picker: ^4.6.1
+  path_provider: ^2.0.11
+  firebase_storage: ^11.2.2
 
 flutter_icons:
   android: true

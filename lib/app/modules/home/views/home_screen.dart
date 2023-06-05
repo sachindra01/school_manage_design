@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:school_management_app/app/common/carousel_slider.dart';
 import 'package:school_management_app/app/common/custom_appbar.dart';
+import 'package:school_management_app/app/common/read_write.dart';
 import 'package:school_management_app/app/common/style.dart';
 import 'package:school_management_app/app/modules/attendence/attendence.dart';
 import 'package:school_management_app/app/modules/leave/leave.dart';
@@ -10,6 +11,7 @@ import 'package:school_management_app/app/modules/unauthorise_module/about_us.da
 // ignore: unused_import
 import 'package:school_management_app/app/modules/unauthorise_module/feedback/feedback_screen.dart';
 import 'package:school_management_app/app/modules/unauthorise_module/staff_hierachy/staff_hierachy_screen.dart';
+import 'package:school_management_app/chat/single_chat_room/chat_list_page.dart';
 
 
 
@@ -48,38 +50,38 @@ const List<Choice> choices = <Choice>[
       image: 'assets/img/logo.jpg',
       route: ''),
       const Choice(
-      title: 'Partents',
-      id: 4,
+      title: 'chat',
+      id: 5,
       image: 'assets/img/logo.jpg',
       route: ''),
       const Choice(
       title: 'others',
-      id: 4,
+      id: 6,
       image: 'assets/img/logo.jpg',
       route: ''),
        const Choice(
       title: 'others',
-      id: 4,
+      id: 7,
       image: 'assets/img/logo.jpg',
       route: ''),
        const Choice(
       title: 'others',
-      id: 4,
+      id: 8,
       image: 'assets/img/logo.jpg',
       route: ''),
        const Choice(
       title: 'others',
-      id: 4,
+      id: 9,
       image: 'assets/img/logo.jpg',
       route: ''),
        const Choice(
       title: 'others',
-      id: 4,
+      id: 10,
       image: 'assets/img/logo.jpg',
       route: ''),
        const Choice(
       title: 'others',
-      id: 4,
+      id: 11,
       image: 'assets/img/logo.jpg',
       route: ''),
      
@@ -113,7 +115,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
         autoImplying: true,
         leadingIcon: const SizedBox()
-        ),
+      ),
       body:Container(
          decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -211,6 +213,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 
               }else if (choices[index].id == 4){
                   Get.to(()=>const AboutUsScreen());
+                
+              }else if (choices[index].id == 5){
+                  Get.to(()=>ChatListPage(
+                    userId: read('userId'),
+                  ));
                 
               }
              

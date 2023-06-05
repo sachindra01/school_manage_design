@@ -1,9 +1,13 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:school_management_app/app/common/style.dart';
 import 'package:school_management_app/app/helper/auth_manager.dart';
 import 'package:school_management_app/app/helper/onboard.dart';
+import 'package:school_management_app/chat/chat_controller/user_controller.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -14,9 +18,16 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
     final AuthenticationManager _authmanager = Get.put(AuthenticationManager());
+    var user = FirebaseAuth.instance.currentUser;
+  final UserController _userCon = Get.put(UserController());
+  final box=GetStorage();
+  dynamic userRole;
+  dynamic userId;
   @override
   void initState() {
     initializeSettings();
+    createCount();
+    getUserId();
     Future.delayed(const Duration(seconds: 3), () async {
       Get.off(() => const OnBoard());
     });
@@ -113,5 +124,48 @@ class _SplashScreenState extends State<SplashScreen> {
         },
       ),
     );
+  }
+  //Create Count in firebase
+  createCount() async{
+    Map<String, dynamic> data = {
+      "countId" : "Count-ID",
+      "userCount" : 0,
+      "companyCount" : 0,
+      "manifestCount" : 0,
+      "statusCount" : 0,
+      "vehicleCount" : 0,
+      "chatCount":0,
+      "groupchatCount":0,
+      "rosterCount":0,
+      "addressBookCount": 0
+
+    };
+    await FirebaseFirestore.instance
+    .collection('Count')
+    .limit(1) 
+    .get() 
+    .then((snapshot) async{
+        if (snapshot.size == 0) {
+            await FirebaseFirestore.instance.collection('Count').doc("Count-ID").set(data).then((value) {debugPrint("Success");});
+        } else {
+          return;
+        }
+    });
+  }
+
+  getUserId(){
+    var data= _userCon.userList;
+    for(int i=0;i<data.length; i++){
+      if(  data[i]['email']==user!.email.toString()){
+        box.write('userRole',data[i]['role']);
+        box.write('firstName',data[i]['firstName']);
+        box.write('lastName',data[i]['lastName']);
+        box.write('phoneNumber',data[i]['phoneNumber']);
+        box.write('companyName',data[i]['companyName']);
+        box.write('isEnabled',data[i]['isEnabled']);
+        box.write('userNote', data[i]['note']);
+        box.write('profilePhoto', data[i]['profilePic']);
+      }
+    }
   }
 }

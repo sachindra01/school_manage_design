@@ -8,6 +8,7 @@ import 'package:school_management_app/app/helper/auth_manager.dart';
 import 'package:school_management_app/app/modules/auth/views/repo.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:school_management_app/bottom_nav.dart';
+import 'package:school_management_app/chat/firebase_services/firestore_services.dart';
 
 class AuthController extends GetxController {
   RxBool isLoading = false.obs;
@@ -19,6 +20,7 @@ class AuthController extends GetxController {
   bool canUseBiometic = false;
  final RxString selectedDate = ''.obs;
   final AuthenticationManager authManager=AuthenticationManager();
+  final FirestoresServices  firestoresServices =FirestoresServices();
 
 
   getLogin(email,password) async {
@@ -28,14 +30,26 @@ class AuthController extends GetxController {
         write('loginInfopassword',  password);
       if(response != null){
         loginResponse = response;
-        Get.off(()=>const BottomNavbar(
-          index: 2,
-        ));
+       FirestoresServices.addUser(
+         loginResponse.data.data.user.email.toString(),
+         loginResponse.data.data.user.id,
+         loginResponse.data.data.user.name.toString(),
+         '',
+         '',
+         loginResponse.data.data.user.name.toString(),
+         false,
+         '',
+         ''
+
+       );
         write('loginInfoemail',  loginResponse.data.data.user.email);
+        write('userId',  loginResponse.data.data.user.id);
         write('apiToken', loginResponse.data.token);
         write('country', loginResponse.data.data.user.country);
          authManager.login( loginResponse.data.token);
-
+          Get.off(()=>const BottomNavbar(
+          index: 2,
+        ));
          showToastMessage(loginResponse.message);
        
 
